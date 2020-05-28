@@ -5,6 +5,10 @@ const aylien = require("aylien_textapi");
 const dotenv = require('dotenv');
 dotenv.config();
 const port = process.env.PORT || 3000;
+const bodyParser = require('body-parser');
+const app = express()
+
+
 
 // console.log(`Your API key is ${process.env.API_KEY}`);
 // set aylien API credentias
@@ -23,8 +27,6 @@ const textapi = new aylien({
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-const app = express()
 
 app.use(express.static('dist'))
 
@@ -49,11 +51,19 @@ app.post('/input', (req, res) => {
     console.log(req.body.content)
     Object.assign(projectData,req.body.content)
 
+    // textapi.sentiment({
+    //     'text': req.body.content
+    //   }, function(error, response) {
+    //     if (error === null) {
+    //       console.log(response);
+    //     }
+    // }).then(data=>{res.send(data);})
     textapi.sentiment({
         'text': req.body.content
       }, function(error, response) {
         if (error === null) {
           console.log(response);
+          res.send(response)
         }
-    }).then(data=>{res.send(data);})
+    })
 })  

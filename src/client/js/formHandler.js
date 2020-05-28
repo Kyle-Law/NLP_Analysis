@@ -6,7 +6,7 @@ function handleSubmit(event) {
     // Client.checkForName(formText)
     postData('/input',{content:formText}).then((data)=>{
         // console.log(data);
-        document.getElementById('results').innerHTML = data;
+        document.getElementById('results').innerHTML = data.polarity;
     })
     // console.log("::: Form Submitted :::")
     // fetch('http://localhost:3000/test')
