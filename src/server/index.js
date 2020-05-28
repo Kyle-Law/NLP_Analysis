@@ -51,13 +51,6 @@ app.post('/input', (req, res) => {
     console.log(req.body.content)
     Object.assign(projectData,req.body.content)
 
-    // textapi.sentiment({
-    //     'text': req.body.content
-    //   }, function(error, response) {
-    //     if (error === null) {
-    //       console.log(response);
-    //     }
-    // }).then(data=>{res.send(data);})
     textapi.sentiment({
         'text': req.body.content
       }, function(error, response) {
