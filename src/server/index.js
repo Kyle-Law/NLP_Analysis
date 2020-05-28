@@ -17,14 +17,6 @@ const textapi = new aylien({
     application_key: process.env.API_KEY
 });
 
-// textapi.sentiment({
-//     'text': 'John is a very good football player!'
-//   }, function(error, response) {
-//     if (error === null) {
-//       console.log(response);
-//     }
-// });
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -41,22 +33,14 @@ app.listen(port, function () {
     console.log(`The server is running on http://localhost:${port}`);
 })
 
-// app.get('/test', function (req, res) {
-//     res.send(mockAPIResponse)
-// })
-
 app.post('/input', (req, res) => {
-    const projectData = {};
-    // projectData.content = req.body.content;
-    console.log(req.body.content)
-    Object.assign(projectData,req.body.content)
-
+    
     textapi.sentiment({
         'text': req.body.content
       }, function(error, response) {
         if (error === null) {
           console.log(response);
-          res.send(response)
+          res.send(response);
         }
     })
 })  
