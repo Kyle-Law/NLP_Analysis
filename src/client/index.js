@@ -12,6 +12,5 @@ import './styles/header.scss';
 // alert("I EXIST")
 
 export {
-    // checkForName,
     handleSubmit
 }

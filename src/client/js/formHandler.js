@@ -1,14 +1,20 @@
+const validateContent = require('./validator')
+
 function handleSubmit(event) {
     event.preventDefault()
 
     // check what text was put into the form field
-    let formText = document.getElementById('name').value
-    postData('/input',{content:formText}).then((data)=>{
+    const formText = document.getElementById('name').value
+    if (validateContent(formText)) {
+      postData('/input',{content:formText}).then((data)=>{
         // console.log(data);
         document.getElementById('result_input').innerHTML = `Input: ${data.text}`;
         document.getElementById('result_polarity').innerHTML = `Polarity: ${data.polarity}`;
         document.getElementById('result_subjectivity').innerHTML = `Subjectivity: ${data.subjectivity}`;
-    })
+      })
+    } else {
+      alert('Input is less than 4 characters!')
+    }
 }
 
 // Async POST
@@ -32,3 +38,4 @@ const postData = async ( url = '', data = {})=>{
 }
 
 export { handleSubmit }
+export {postData}
