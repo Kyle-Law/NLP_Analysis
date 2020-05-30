@@ -1,7 +1,6 @@
-const validateContent = require('./validator')
+import {validateContent} from './validator'
 
-test('Validate the content length', () => {
-    expect(validateContent('he')).toBe(False);
-
-    expect(validateContent('Here is some lengthy content')).toBe(True);
-})
+test('validate Content', () => {
+    expect(validateContent('https://www.google.com')).toBe(true);
+    expect(validateContent('abcxyz')).toBe(false);
+  });

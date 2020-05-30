@@ -5,6 +5,7 @@ import './styles/base.scss';
 import './styles/footer.scss';
 import './styles/form.scss';
 import './styles/header.scss';
+import { validateContent } from './js/validator';
 
 
 // console.log(checkForName);
@@ -12,5 +13,6 @@ import './styles/header.scss';
 // alert("I EXIST")
 
 export {
-    handleSubmit
+    handleSubmit,
+    validateContent
 }

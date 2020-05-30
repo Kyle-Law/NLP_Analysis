@@ -5,7 +5,7 @@ function handleSubmit(event) {
 
     // check what text was put into the form field
     const formText = document.getElementById('name').value
-    if (validateContent(formText)) {
+    if (Client.validateContent(formText)) {
       postData('/input',{content:formText}).then((data)=>{
         // console.log(data);
         document.getElementById('result_input').innerHTML = `Input: ${data.text}`;
