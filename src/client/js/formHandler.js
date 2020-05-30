@@ -6,14 +6,14 @@ function handleSubmit(event) {
     // check what text was put into the form field
     const formText = document.getElementById('name').value
     if (Client.validateContent(formText)) {
-      postData('/input',{content:formText}).then((data)=>{
+      postData('http://localhost:3000/input',{content:formText}).then((data)=>{
         // console.log(data);
-        document.getElementById('result_input').innerHTML = `Input: ${data.text}`;
-        document.getElementById('result_polarity').innerHTML = `Polarity: ${data.polarity}`;
-        document.getElementById('result_subjectivity').innerHTML = `Subjectivity: ${data.subjectivity}`;
+        document.getElementById('result_input').innerHTML = `Input: ${data.text.slice(0,500)}...`;
+        document.getElementById('result_polarity').innerHTML = `Polarity: <span class="highlight">${data.polarity}</span > with confidence of ${(data.polarity_confidence*100).toFixed(2)}%`;
+        document.getElementById('result_subjectivity').innerHTML = `Subjectivity: <span class="highlight">${data.subjectivity}</span > with confidence of ${(data.subjectivity_confidence*100).toFixed(2)}%`;
       })
     } else {
-      alert('Input is less than 4 characters!')
+      alert('Invalid url link')
     }
 }
 
@@ -33,7 +33,7 @@ const postData = async ( url = '', data = {})=>{
       const newData = await response.json();
       return newData
     }catch(error) {
-    console.log("error", error);
+      console.log("error", error);
     }
 }
 

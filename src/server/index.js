@@ -3,11 +3,13 @@ const express = require('express');
 // const mockAPIResponse = require('./mockAPI.js');
 const aylien = require("aylien_textapi");
 const dotenv = require('dotenv');
-dotenv.config();
-const port = process.env.PORT || 3000;
+const cors = require("cors");
 const bodyParser = require('body-parser');
-const app = express()
+const port = process.env.PORT || 3000;
 
+dotenv.config();
+const app = express()
+app.use(cors());
 
 
 // console.log(`Your API key is ${process.env.API_KEY}`);
@@ -36,7 +38,7 @@ app.listen(port, function () {
 app.post('/input', (req, res) => {
     
     textapi.sentiment({
-        'text': req.body.content
+        'url': req.body.content
       }, function(error, response) {
         if (error === null) {
           console.log(response);
